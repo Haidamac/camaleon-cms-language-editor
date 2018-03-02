@@ -43,14 +43,23 @@ module Plugins::CamaLanguageEditor::MainHelper
 
       if has_children
         cama_language_plugin_render_item_translations(_groups, base_key, res, p_keys + [key]).each_with_index do |html_g, index|
-          res_html[index] << "<li data-class='#{(p_keys+[key]).join('_')}' class='branch #{(p_keys+[key]).join('_')}'> <i class='indicator glyphicon glyphicon-minus-sign'></i>
+          res_html[index] << "<li data-class='#{(p_keys+[key]).join('_')}' data-branch-name='#{key}' class='branch #{(p_keys+[key]).join('_')}'>
+                                  <i class='indicator glyphicon glyphicon-minus-sign'></i>
                                   <label>#{'&nbsp;' * (((p_keys.size+1)*2)-1)}#{key}: </label>
                                   <ul class='list-group'> #{html_g} </ul>
                               </li>"
         end
       else
         _groups.each_with_index do |g_val, index|
-          res_html[index] << "<li><div class='input-group form-control'><span class='input-group-addon' style='text-align: left !important;'><b>#{'&nbsp;' * ((p_keys.size+1)*2)}#{key}: </b></span><input type='text' class='form-control' value='#{(g_val.is_a?(Hash) ? '' : g_val).gsub("'", "\\\'") }'></div></li>"
+          res_html[index] << "<li>
+                                <div class='input-group form-control'>
+                                  <span class='input-group-addon' style='text-align: left !important;'>
+                                    <b>#{'&nbsp;' * ((p_keys.size+1)*2)}#{key}: </b>
+                                  </span>
+                                  <input type='text' name='#{key}' class='form-control' value='#{(g_val.is_a?(Hash) ? '' : g_val).gsub("'", "\\\'") }'>
+                                  <input type='button' class='translate-confirm' value='ok'>
+                                </div>
+                              </li>"
         end
       end
     end
