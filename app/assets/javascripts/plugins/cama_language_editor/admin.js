@@ -49,9 +49,11 @@ jQuery(function(){
     branch.push(prefix, lang);
     branch = branch.reverse();
 
-    $.post('/admin/plugins/cama_language_editor/update', { lang: lang, prefix: prefix, branch: branch }, function (response) {
+    input.attr('disabled', 'disabled');
 
-    })
+    $.post('/admin/plugins/cama_language_editor/update', { lang: lang, branch: branch }).complete(function(){
+      input.prop("disabled", false);
+    });
 
   });
 
