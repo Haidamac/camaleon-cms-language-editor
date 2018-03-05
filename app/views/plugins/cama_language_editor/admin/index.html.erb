@@ -1,5 +1,5 @@
 <% params[:prefix] = 'camaleon_cms' unless params[:prefix].present? %>
-<% params[:languages] ||= ['uk', 'en'] %>
+<% params[:languages] ||= ['uk', 'ru'] %>
 <%= stylesheet_link_tag(plugin_asset_path('admin')) %>
 <%= javascript_include_tag(plugin_asset_path('admin')) %>
 <% languages = params[:languages] %>
